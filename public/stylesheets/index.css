@@ -1,0 +1,22 @@
+h1 {
+  font-weight: 100;
+  font-size: 64px;
+}
+h1, h6 {
+  text-align: center
+}
+.center {
+  width: 340px;
+  max-width: 100vw;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+}
+img {
+  height: auto;
+  width: 190px;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+}

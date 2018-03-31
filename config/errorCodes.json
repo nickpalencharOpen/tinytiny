@@ -1,0 +1,21 @@
+{
+  "1": {
+    "error": "Unknown Error",
+    "body": "An error occurred and we didn't even know it was possible... sorry about that..."
+  },
+  "5": {
+    "error": "User not whitelisted",
+    "body": "This site requires your email to be whitelisted. Contact the administrator"
+  },
+  "20": {
+    "error": "URL Too Short"
+  },
+  "29": {
+    "error": "URL Too Large"
+  },
+  "404": {
+    "error": "Not Found",
+    "image": "https://http.cat/404",
+    "body": "Sorry, the tiny-link you're looking for may have moved or have been deleted... or may never have existed at all..."
+  }
+}

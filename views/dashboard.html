@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!--<link rel="icon" href="../../../favicon.ico">-->
+
+  <title>Palen.to</title>
+
+  <!-- Bootstrap core CSS -->
+  <script async src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="public/stylesheets/dashboard.css">
+  <script src="public/scripts/dashboard-pagination.js"></script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      Welcome {{username}}.
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+      <dev class="nav navbar-nav navbar-right">
+        <a href="/logout"><button type="button" class="btn btn-warning">logout</button></a>
+      </dev>
+  </div><!-- /.container-fluid -->
+</nav>
+
+<section class="link-generator">
+  <div class="well container">
+    <form method="post" action="/api/new-link">
+      <label for="link-to-shorten">Link to shorten</label>
+      <div class="input-group">
+        <input id="link-to-shorten" type="text" name="expandedUrl" class="form-control" placeholder="https://www.nickpalenchar.com" required aria-required>
+      </div>
+      <label for="custom-link">Custom link (optional)</label>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon3">palen.to/</span>
+        <input type="text" class="form-control" id="custom-link" placeholder="custom" aria-describedby="basic-addon3" name="customName">
+      </div>
+      <button type="submit" class="btn btn-danger btn-right">Minify!</button>
+    </form>
+  </div>
+</section><!-- /.container -->
+
+{% if success %}
+<section id="success">
+    <div class="alert alert-success alert-dismissible">
+      <p><strong>All set</strong></p>
+      <h5>palen.to/{{success.link_id}}</h5>
+      <aside>It's also added to your palenlinks below</aside>
+    </div>
+</section>
+{% endif %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<section class="previous-links">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Palenlink</th>
+      <th>Full URL</th>
+      <th>Created</th>
+    </tr>
+    </thead>
+    {% for key, val in linkPages %}
+      <tbody class="link-page" id="link-page-{{key}}" {% if key > 0 %} style="display:none" {% endif %}>
+      {% for key2, link in val %}
+      <tr>
+        <th><a href="#" id="">{{NAKED_URL}}/{{link.link_id}}</a></th>
+        <th><a href="{{link.expandedUrl}}" target="_blank"><input type="text" readonly value="{{link.expandedUrl}}" id="link-url-{{key}}-{{key2}}"></a> <a href="javascript:palento_copyToClipboard('link-url-{{key2}}-{{key}}', 'link-btn-{{key2}}-{{key}}', 'Copied!')"><button class="btn btn-default" id="link-btn-{{key2}}-{{key}}">Copy</button></a></th>
+        <th>{{link.creationDate|date('g:ia, M jS Y')}}</th>
+      </tr>
+      {% endfor %}
+      </tbody>
+    {% endfor %}
+  </table>
+
+  <div class="btn-group" role="group" aria-label="...">
+  {% for key, val in linkPages %}
+    <a href="javascript:palento_goToPage({{key}})"><button type="button" class="btn btn-primary">{{key+1}}</button></a>
+  {% endfor %}
+  </div>
+
+</section>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<!--<script src="../../../../assets/js/vendor/popper.min.js"></script>-->
+<!--<script src="../../../../dist/js/bootstrap.min.js"></script>-->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+</body>
+</html>

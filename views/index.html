@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Palento</title>
+  <link rel="stylesheet" href="public/bootstrap.min.css">
+  <link rel="stylesheet" href="public/stylesheets/index.css">
+</head>
+<body>
+<style>
+  body{
+    overflow: hidden;
+  }
+  svg{
+    display: block;
+    margin-top: 50px;
+    offset-rotation: 0;
+    offset-path: path("M.15,153.32s694.6-216,903.09-97.5,81,276,0,237S745.75,61.83,1102.73,6.33s267,306,558,201,259.44-93.56,259.44-93.56");
+    offset-rotation: 45deg auto;
+    animation: path-animation 5s linear infinite;
+  }
+  svg polygon {
+    stroke: #000;
+    stroke-linejoin: round;
+  }
+
+  @keyframes path-animation {
+    0% {
+      offset-distance: 0;
+    }
+    100% {
+      offset-distance: 100%;
+    }
+  }
+
+
+</style>
+<div class="test"></div>
+<svg width="100px" viewBox="0 0 333.37 271.9">
+  <polygon class="cls-1" fill="#d33c3c" points="332.87 0.5 67.81 203.91 0.5 155.51 332.87 0.5"/>
+  <polygon class="cls-2" fill="#b23636" points="332.87 0.5 87.78 219.18 73.34 254.85 67.81 203.91 332.87 0.5"/>
+  <polygon class="cls-1" fill="#d33c3c" points="332.87 0.5 166.02 271.4 99.01 226.67 87.78 219.18 332.87 0.5"/>
+  <polygon class="cls-3" fill="#7f2929" points="99.01 226.67 73.34 254.85 87.78 219.18 99.01 226.67"/>
+</svg>
+<div class="center">
+  <h1>TinyTiny</h1>
+  <h6>A minimal URL shortener</h6>
+  <br/><br/>
+  <a href="/auth/google"><img src="public/google.png"></a>
+</div>
+</body>
+</html>

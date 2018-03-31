@@ -1,0 +1,7 @@
+{
+  "defaultStartLength": 2,
+  "minLength": 2,
+  "maxLength": 160,
+  "validChars": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+  "customNameAllowed": true
+}
