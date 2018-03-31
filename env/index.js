@@ -1,4 +1,6 @@
 let chalk = require('chalk');
+let fs = require('fs');
+let path = require('path');
 
 if(process.env.SMOKE_TEST){
     console.log(chalk.inverse("Smoke test responding!"));
@@ -16,5 +18,14 @@ else if(process.env.NODE_ENV === 'staging'){
 }
 else {
     console.log(chalk.inverse("Running in DEVELOPMENT mode"));
-    module.exports = require('./development');
+    if (fs.existsSync(path.join(__dirname, '../secrets/development.js'))) {
+        console.log(chalk.gray("using variables from secrets/development.js"));
+        module.exports = require('../secrets/development');
+    }
+    else {
+        console.log(chalk.red(chalk.bold("WARNING ") + "using environment variables from `env`. This will be removed in the next" +
+            "major release. Create a `secrets` directory and add move environment variables there instead." +
+            "See https://github.com/nickpalencharOpen/tinytiny/issues/1 for more info."));
+        module.exports = require('./development');
+    }
 }
