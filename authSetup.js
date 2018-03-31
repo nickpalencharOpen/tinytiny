@@ -6,7 +6,6 @@ let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 let User = mongoose.model('User');
 let ENV = require('./env');
-console.log("env??", ENV);
 
 module.exports = function (app) {
     app.use(session({
