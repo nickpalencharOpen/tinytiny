@@ -83,12 +83,9 @@ app.get('/', (req, res ) =>
 });
 // hard-coded redirects
 let hardRoutes = require('./config/hardRoutes');
-console.log(chalk.red('ROUTES '), hardRoutes);
 for(let k in hardRoutes){
     if(hardRoutes.hasOwnProperty(k)) {
-        console.log("adding in ", k, " ", hardRoutes[k]);
         app.get(`/${k}`, (req, res) => {
-            console.log("AT A ROUTE, redirect to ", hardRoutes[k]);
             res.redirect(hardRoutes[k])
         });
     }
@@ -124,7 +121,6 @@ app.get('/error', (req, res) => {
 app.get('/:id', (req, res) => {
     //@@~~**REDIRECTION TIME**~~@@
     // THIS IS WHAT WE CAME HER FOR PPL1//
-    console.log("looking up ", req.params.id);
     return Link.findOne({link_id: req.params.id})
         .then(result => {
             if(result) res.redirect(result.expandedUrl);
