@@ -20,7 +20,7 @@ TinyTiny takes the following structure
 ├ authSetup.js
 ```
 
-They contain the following
+They contain the following:
 
 + **bin:** contains setup for the server. `www` is used to start the app via `npm start`
 + **config:** various options to change how the app works (see readme contained within)
