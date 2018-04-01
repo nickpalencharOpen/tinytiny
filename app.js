@@ -13,6 +13,7 @@ let {requireAuthentication, randomHash} = require('./helper');
 
 const { BASE_URL, NAKED_URL=BASE_URL } = require('./env');
 const { linksPerPage: LINKS_PER_PAGE } = require('./config/dashboard');
+const GENERAL = require('./config/general');
 
 let app = express();
 ///// data models ////
@@ -78,7 +79,7 @@ app.get('/', (req, res ) =>
     if(req.isAuthenticated()){
         res.redirect('/dashboard');
     }
-    else res.render('index');
+    else res.render('index', GENERAL);
 });
 // hard-coded redirects
 let hardRoutes = require('./config/hardRoutes');
@@ -106,7 +107,9 @@ app.get('/dashboard', requireAuthentication, (req, res) => {
 
             let success = req.query.success && JSON.parse(req.query.success);
 
-            res.render('dashboard', {username: req.user.name, linkPages, success, NAKED_URL});
+            let data = Object.assign({}, {username: req.user.name, linkPages, success, NAKED_URL}, GENERAL );
+
+            res.render('dashboard', data);
         });
 });
 

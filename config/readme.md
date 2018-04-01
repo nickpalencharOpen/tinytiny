@@ -1,6 +1,13 @@
 # TinyTiny options
 
-Extra options and configuration
+Extra options and configuration.
+
+### general.json
+List of general naming options used throughout the app, and the ability to change them. Useful if you want to replace the TinyTiny branding with your own.
+
+- `TITLE` - _string_ - Title of the app, used in the html `<title>` tag and on the landing page.
+- `SUBTITLE` - _string_ - Text beneath the title in the landing page.
+- `SHORT_LINK_NAME` - _string_ - Name of the shortened links that redirect to the full URLs.
 
 ### reserved.json
 List of routes that cannot be used as names. BE CAREFUL ABOUT EDITING.
