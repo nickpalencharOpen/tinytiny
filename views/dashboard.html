@@ -7,7 +7,7 @@
   <meta name="author" content="">
   <!--<link rel="icon" href="../../../favicon.ico">-->
 
-  <title>Palen.to</title>
+  <title>{{TITLE}}</title>
 
   <!-- Bootstrap core CSS -->
   <script async src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -44,7 +44,7 @@
       </div>
       <label for="custom-link">Custom link (optional)</label>
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon3">palen.to/</span>
+        <span class="input-group-addon" id="basic-addon3">{{NAKED_URL}}/</span>
         <input type="text" class="form-control" id="custom-link" placeholder="custom" aria-describedby="basic-addon3" name="customName">
       </div>
       <button type="submit" class="btn btn-danger btn-right">Minify!</button>
@@ -56,8 +56,8 @@
 <section id="success">
     <div class="alert alert-success alert-dismissible">
       <p><strong>All set</strong></p>
-      <h5>palen.to/{{success.link_id}}</h5>
-      <aside>It's also added to your palenlinks below</aside>
+      <h5>{{NAKED_URL}}/{{success.link_id}}</h5>
+      <aside>It's also added to your {{SHORT_LINK_NAME}}s below</aside>
     </div>
 </section>
 {% endif %}
@@ -71,7 +71,7 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th>Palenlink</th>
+      <th>{{SHORT_LINK_NAME}}</th>
       <th>Full URL</th>
       <th>Created</th>
     </tr>

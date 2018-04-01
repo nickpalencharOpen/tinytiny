@@ -22,8 +22,6 @@ module.exports = function (app) {
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((obj, done) => done(null, obj));
 
-    console.log("redirect url?? ", ENV.GOOGLE_REDIRECT_URL);
-
     let googleCredentials = {
         clientID: ENV.GOOGLE_CLIENT_ID,
         clientSecret: ENV.GOOGLE_SECRET,
@@ -49,11 +47,8 @@ module.exports = function (app) {
         });
 
         return User.findOne({email: lookupEmail}).then(profile => {
-            console.log("looking for user verifiy");
             if (profile) return done(null, profile);
-            console.log("errorrrr");
             done(5);
-            // profile ? done(null, profile) : done("error")
         });
     };
 

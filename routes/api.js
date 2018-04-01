@@ -42,11 +42,10 @@ router.post('/new-link', requireAuthentication ,(req, res) => {
     }
     tryLink()
         .then(result => {
-            console.log("Final result:::: ", result);
             res.redirect('/dashboard?success=' + JSON.stringify(result));
         })
         .catch( err => {
-            console.log("error???", err);
+            console.log("ERR", err);
             if(err.nick) res.render('error', {err} );
             else res.redirect('/error?code=1');
         })

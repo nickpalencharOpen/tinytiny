@@ -13,6 +13,7 @@ let {requireAuthentication, randomHash} = require('./helper');
 
 const { BASE_URL, NAKED_URL=BASE_URL } = require('./env');
 const { linksPerPage: LINKS_PER_PAGE } = require('./config/dashboard');
+const GENERAL = require('./config/general');
 
 let app = express();
 ///// data models ////
@@ -78,16 +79,13 @@ app.get('/', (req, res ) =>
     if(req.isAuthenticated()){
         res.redirect('/dashboard');
     }
-    else res.render('index');
+    else res.render('index', GENERAL);
 });
 // hard-coded redirects
 let hardRoutes = require('./config/hardRoutes');
-console.log(chalk.red('ROUTES '), hardRoutes);
 for(let k in hardRoutes){
     if(hardRoutes.hasOwnProperty(k)) {
-        console.log("adding in ", k, " ", hardRoutes[k]);
         app.get(`/${k}`, (req, res) => {
-            console.log("AT A ROUTE, redirect to ", hardRoutes[k]);
             res.redirect(hardRoutes[k])
         });
     }
@@ -106,7 +104,9 @@ app.get('/dashboard', requireAuthentication, (req, res) => {
 
             let success = req.query.success && JSON.parse(req.query.success);
 
-            res.render('dashboard', {username: req.user.name, linkPages, success, NAKED_URL});
+            let data = Object.assign({}, {username: req.user.name, linkPages, success, NAKED_URL}, GENERAL );
+
+            res.render('dashboard', data);
         });
 });
 
@@ -121,7 +121,6 @@ app.get('/error', (req, res) => {
 app.get('/:id', (req, res) => {
     //@@~~**REDIRECTION TIME**~~@@
     // THIS IS WHAT WE CAME HER FOR PPL1//
-    console.log("looking up ", req.params.id);
     return Link.findOne({link_id: req.params.id})
         .then(result => {
             if(result) res.redirect(result.expandedUrl);
