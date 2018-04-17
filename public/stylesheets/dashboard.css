@@ -40,3 +40,5 @@ th:nth-child(1){
   display: block;
   margin: 62px auto 0;
 }
+
+.material-icons.md-18 { font-size: 18px; }
