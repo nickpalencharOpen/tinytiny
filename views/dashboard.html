@@ -82,7 +82,7 @@
       {% for key2, link in val %}
       <tr>
         <td>
-          <a href="'{{NAKED_URL}}/{{link.link_id}}'" target="_blank">
+          <a href="{{link.expandedUrl}}" target="_blank">
             <input type="text" readonly value="{{NAKED_URL}}/{{link.link_id}}" id="tiny-link-{{key}}-{{key2}}">
           </a>
           <a href="javascript:palento_copyToClipboard('tiny-link-{{key}}-{{key2}}', 'tiny-link-btn-{{key}}-{{key2}}', 'Copied!')">
