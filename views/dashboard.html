@@ -16,6 +16,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="public/stylesheets/dashboard.css">
   <script src="public/scripts/dashboard-pagination.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 
@@ -80,9 +81,20 @@
       <tbody class="link-page" id="link-page-{{key}}" {% if key > 0 %} style="display:none" {% endif %}>
       {% for key2, link in val %}
       <tr>
-        <th><a href="#" id="">{{NAKED_URL}}/{{link.link_id}}</a></th>
-        <th><a href="{{link.expandedUrl}}" target="_blank"><input type="text" readonly value="{{link.expandedUrl}}" id="link-url-{{key}}-{{key2}}"></a> <a href="javascript:palento_copyToClipboard('link-url-{{key2}}-{{key}}', 'link-btn-{{key2}}-{{key}}', 'Copied!')"><button class="btn btn-default" id="link-btn-{{key2}}-{{key}}">Copy</button></a></th>
-        <th>{{link.creationDate|date('g:ia, M jS Y')}}</th>
+        <td>
+          <a href="{{link.expandedUrl}}" target="_blank">
+            <input type="text" readonly value="{{NAKED_URL}}/{{link.link_id}}" id="tiny-link-{{key}}-{{key2}}">
+          </a>
+          <a href="javascript:palento_copyToClipboard('tiny-link-{{key}}-{{key2}}', 'tiny-link-btn-{{key}}-{{key2}}', 'Copied!')">
+            <button class="btn btn-default" id="tiny-link-btn-{{key}}-{{key2}}"><i class="material-icons md-18">content_copy</i></button></a>
+        </td>
+        <td>
+          <a href="{{link.expandedUrl}}" target="_blank">
+            <input type="text" readonly value="{{link.expandedUrl}}" id="link-url-{{key}}-{{key2}}">
+          </a>
+          <a href="javascript:palento_copyToClipboard('link-url-{{key2}}-{{key}}', 'link-btn-{{key2}}-{{key}}', 'Copied!')">
+          <button class="btn btn-default" id="link-btn-{{key2}}-{{key}}">Copy</button></a></td>
+        <td>{{link.creationDate|date('g:ia, M jS Y')}}</td>
       </tr>
       {% endfor %}
       </tbody>
