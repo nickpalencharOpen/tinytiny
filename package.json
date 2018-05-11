@@ -9,6 +9,7 @@
     "start": "node ./bin/www",
     "start:prod": "node ./bin/www",
     "build": "docker build -t npalenchar/palento:prod .",
+    "test": "jest",
     "deploy": ""
   },
   "dependencies": {
@@ -29,5 +30,8 @@
     "passport-google-oauth20": "^1.0.0",
     "serve-favicon": "~2.4.5",
     "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3"
   }
 }
