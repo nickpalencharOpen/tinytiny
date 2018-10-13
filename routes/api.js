@@ -21,24 +21,31 @@ router.post('/new-link', requireAuthentication ,(req, res) => {
     function tryLink(n=defaultStartLength, attempt=1){
         // randomly tries to find an available link
         return new Promise((resolve, reject) => {
-            let id = (require('../config/linkOptions').customNameAllowed && customName) || randomHash(n);
+            const id = (require('../config/linkOptions').customNameAllowed && customName) || randomHash(n);
+            // reject before the async call to avoid unneeded work
+            if(reserved.includes(id.toLowerCase())){
+                reject({ nick:true, error: "Link is a reserved word", body: "You can't use that! Because programming needs. " +
+                "Try something else. Please note that no uppercase version of the reserved word can be used either, " +
+                "to avoid ambiguity."});
+            }
+
             return Link.find({link_id: id})
                 .then(result => {
                     if(result.length) {
                         console.log("link already exists: ", result);
-                        if(attempt > 100) reject({nick:true, error: "Gave up finding an available link", body: "This might be solved " +
+                        if(customName) reject({ nick: true, error: `The custom name ${customName} is not avaialable`, body: `Your name was too cool ` +
+                        `and has already been taken. Maybe you should try another name instead.`})
+                        else if(attempt > 100) reject({nick:true, error: "Gave up finding an available link", body: "This might be solved " +
                         "if you try again. If not, the admin might have to expand the algorithm. Wow this app grew quick!"});
                         else return tryLink(n+1, attempt+1);
                     }
-                    if(reserved.includes(id.toLowerCase())){
-                        reject({ nick:true, error: "Link is a reserved word", body: "You can't use that! Because programming needs. " +
-                        "Try something else. Please note that no uppercase version of the reserved word can be used either, " +
-                        "to avoid ambiguity."});
-                    }
-                    else return Link.create({link_id: id, expandedUrl, author: req.user._id})
+                    
+                    return Link.create({link_id: id, expandedUrl, author: req.user._id})
                         .then(result => resolve(result));
                 })
         })
+
+
     }
     tryLink()
         .then(result => {
