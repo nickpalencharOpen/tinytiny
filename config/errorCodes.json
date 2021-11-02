@@ -4,8 +4,8 @@
     "body": "An error occurred and we didn't even know it was possible... sorry about that..."
   },
   "5": {
-    "error": "User not whitelisted",
-    "body": "This site requires your email to be whitelisted. Contact the administrator"
+    "error": "User not allowlisted",
+    "body": "This site requires your email to be allowlisted. Contact the administrator"
   },
   "20": {
     "error": "URL Too Short"
