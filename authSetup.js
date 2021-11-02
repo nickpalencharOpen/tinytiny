@@ -41,14 +41,16 @@ module.exports = function (app) {
         if (!(profile && profile.emails)) {
             return done("There was a problem with the profile structure provided by google");
         }
+        console.log('profile', profile);
 
         // get the email that will be checked on the whitelist (see comment above)
         let lookupEmail = null;
         profile.emails.forEach(emailObj => {
-            if (emailObj.type === 'account') {
+            if (emailObj.verified) {
                 lookupEmail = emailObj.value;
             }
         });
+        console.log('lookupEmail is ', lookupEmail);
 
         return User.findOne({email: lookupEmail}).then(profile => {
             console.log("looking for user verifiy");
