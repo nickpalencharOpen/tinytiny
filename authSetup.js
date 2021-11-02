@@ -1,5 +1,5 @@
 let session = require('express-session');
-let MongoStore = require('connect-mongo')(session);
+let MongoStore = require('connect-mongo');
 let passport = require('passport');
 let mongoose = require('mongoose');
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -10,7 +10,9 @@ let ENV = require('./env');
 module.exports = function (app) {
     app.use(session({
         secret: ENV.SESSION_SECRET,
-        store: new MongoStore({mongooseConnection: mongoose.connection}),
+        store: MongoStore.create({
+            mongoUrl: ENV.MONGO_URL,
+            mongooseConnection: mongoose.connection }),
         resave: false,
         saveUninitialized: false,
         cookie: {maxAge: 1470409855938}
